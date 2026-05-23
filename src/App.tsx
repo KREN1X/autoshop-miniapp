@@ -158,6 +158,9 @@ const products: any = {
 
 export default function App() {
 
+  const tg = window.Telegram?.WebApp
+
+  const user = tg?.initDataUnsafe?.user
   const [currentCategory, setCurrentCategory] =
     useState<string | null>(null)
 
@@ -227,7 +230,33 @@ export default function App() {
       sum + item.price * item.quantity,
     0
   )
+  const createOrder = async () => {
 
+  if (cart.length === 0) return
+
+  await fetch("http://127.0.0.1:5000/create-order", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+
+      user_id: user?.id || "guest",
+
+      products: cart,
+
+      total: totalPrice
+
+    })
+
+  })
+
+  alert("Заказ оформлен 😄")
+
+}
   return (
     <div
       style={{
@@ -692,20 +721,23 @@ export default function App() {
                 </div>
 
                 <button
-                  style={{
-                    width: "100%",
-                    background: "#2ea6ff",
-                    border: "none",
-                    color: "white",
-                    padding: "16px",
-                    borderRadius: "14px",
-                    fontSize: "18px",
-                    marginTop: "25px",
-                    cursor: "pointer"
-                  }}
-                >
-                  ✅ Оформить заказ
-                </button>
+
+  onClick={createOrder}
+
+  style={{
+    width: "100%",
+    background: "#2ea6ff",
+    border: "none",
+    color: "white",
+    padding: "16px",
+    borderRadius: "14px",
+    fontSize: "18px",
+    marginTop: "25px",
+    cursor: "pointer"
+  }}
+>
+  ✅ Оформить заказ
+</button>
 
               </div>
 
