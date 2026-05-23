@@ -234,7 +234,7 @@ export default function App() {
 
   if (cart.length === 0) return
 
-  await fetch("http://147.45.233.40:5000/create-order", {
+  await fetch("https://scenarios-psychiatry-contributors-consist.trycloudflare.com/create-order", {
 
     method: "POST",
 
