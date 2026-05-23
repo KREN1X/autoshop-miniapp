@@ -158,7 +158,7 @@ const products: any = {
 
 export default function App() {
 
-  const tg = window.Telegram?.WebApp
+  const tg = (window as any).Telegram?.WebApp
 
   const user = tg?.initDataUnsafe?.user
   const [currentCategory, setCurrentCategory] =
@@ -234,7 +234,7 @@ export default function App() {
 
   if (cart.length === 0) return
 
-  await fetch("http://127.0.0.1:5000/create-order", {
+  await fetch("http://147.45.233.40:5000/create-order", {
 
     method: "POST",
 
