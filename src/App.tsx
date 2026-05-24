@@ -160,6 +160,7 @@ export default function App() {
 
   const tg = (window as any).Telegram?.WebApp
 
+  
   const user = tg?.initDataUnsafe?.user
   const [currentCategory, setCurrentCategory] =
     useState<string | null>(null)
@@ -244,11 +245,13 @@ export default function App() {
 
     body: JSON.stringify({
 
-      user_id: user?.id || "guest",
+  telegram_id: user?.id || "guest",
 
-      products: cart,
+  username: user?.username || user?.first_name || "unknown",
 
-      total: totalPrice
+  products: cart,
+
+  total: totalPrice
 
     })
 
