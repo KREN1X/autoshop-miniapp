@@ -235,7 +235,7 @@ export default function App() {
 
   if (cart.length === 0) return
 
-  await fetch("https://scenarios-psychiatry-contributors-consist.trycloudflare.com/create-order", {
+  await fetch("https://fabulous-dictionary-overall-power.trycloudflare.com", {
 
     method: "POST",
 
