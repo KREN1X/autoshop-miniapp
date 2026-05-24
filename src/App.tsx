@@ -235,6 +235,8 @@ export default function App() {
 
   if (cart.length === 0) return
 
+  console.log(user)
+
   await fetch("https://fabulous-dictionary-overall-power.trycloudflare.com/create-order", {
 
     method: "POST",
