@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const categories = [
   {
@@ -160,15 +160,30 @@ export default function App() {
 
   const tg = (window as any).Telegram?.WebApp
 
-  
-  const user = tg?.initDataUnsafe?.user
-  const [currentCategory, setCurrentCategory] =
-    useState<string | null>(null)
+const user = tg?.initDataUnsafe?.user
 
-  const [showCart, setShowCart] =
-    useState(false)
+const [currentCategory, setCurrentCategory] =
+  useState<string | null>(null)
 
-  const [cart, setCart] = useState<any[]>([])
+const [showCart, setShowCart] =
+  useState(false)
+
+const [cart, setCart] = useState<any[]>(() => {
+
+  const savedCart = localStorage.getItem("cart")
+
+  return savedCart ? JSON.parse(savedCart) : []
+
+})
+
+useEffect(() => {
+
+  localStorage.setItem("cart", JSON.stringify(cart))
+
+}, [cart])
+
+
+
 
   // ДОБАВИТЬ В КОРЗИНУ
 
